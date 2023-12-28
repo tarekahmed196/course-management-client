@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const CourseForm = () => {
-    const [accessToken, setAccessToken] = useState('');
+    // const [accessToken, setAccessToken] = useState('');
+    const accessToken = localStorage.getItem('token')
+    console.log("access token from course",accessToken)
 
   const [course, setCourse] = useState({
     name: '',
@@ -68,6 +71,7 @@ const CourseForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(`Bearer ${accessToken}`)
 
     try {
       const response = await fetch('http://localhost:8000/api/courses', {
@@ -76,10 +80,17 @@ const CourseForm = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`
         },
+        
         body: JSON.stringify(course),
       });
 
       if (response.ok) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Course created Successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         console.log('Course created successfully');
         // Optionally, you can handle success actions here
       } else {

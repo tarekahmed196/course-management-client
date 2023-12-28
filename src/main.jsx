@@ -11,6 +11,9 @@ import Home from './components/Home.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import CourseForm from './components/CourseForm.jsx';
+import LogOut from './components/LogOut.jsx';
+import ViewCourses from './components/ViewCourses.jsx';
+import Details from './components/Details.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +33,17 @@ const router = createBrowserRouter([
         element: <Login></Login>
       },
       {
+        path: "logout",
+        element: <LogOut></LogOut>
+      },
+      {
         path: "register",
         element: <Register></Register>
+      },
+      {
+        path: "view/:id",
+        element: <Details></Details>,
+        loader: ({params})=> fetch(`http://localhost:8000/api/courses/${params.id}`)
       }
     ]
   },

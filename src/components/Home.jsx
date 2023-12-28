@@ -5,7 +5,7 @@ import ViewCourses from './ViewCourses';
 const Home = () => {
     return (
         <div >
-            <ViewCourses></ViewCourses>
+            <ViewCourses ></ViewCourses>
         </div>
     );
 };

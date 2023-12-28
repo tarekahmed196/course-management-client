@@ -1,20 +1,51 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate()
+  
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    // Check if the token is present in local storage
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, []);
+
+  const handleLogOut=()=>{
+    setLoggedIn(false);
+    navigate('/logout')
+
+  }
+  const handleLogin=()=>{
+    setLoggedIn(false);
+    navigate('/logout')
+
+  }
+
   const navOptions = (
     <>
       <li>
         <Link to="/">Home</Link>
       </li>
-      <li>
-        <Link to="/course">Course Form</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-      
+      {isLoggedIn && (
+        <>
+          <li>
+            <Link to="/course">Course Form</Link>
+          </li>
+          <li>
+            <button onClick={handleLogOut}>Log Out</button>
+          </li>
+        </>
+      )}
+      {!isLoggedIn && (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
   );
   return (

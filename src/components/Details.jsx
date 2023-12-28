@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ViewCourses = () => {
+const Details = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem('token');
@@ -32,20 +32,17 @@ const ViewCourses = () => {
   }, [accessToken]);
 
   return (
-    <div className='grid grid-cols-3 gap-3 mt-4'>
+    <div className='grid grid-cols-3 gap-3'>
       {loading ? (
         <p>Loading...</p>
       ) : (
         courses.map((course) => (
-          <div  key={course._id} className=" card w-96 bg-base-100 shadow-xl mb-4">
+          <div  key={course.id} className=" card w-96 bg-base-100 shadow-xl mb-4">
             <div className="card-body">
               <h2 className="card-title">{course.name}</h2>
               <p>{course.description}</p>
               {/* Add other details as needed */}
-              <div className="card-actions justify-end">
-                <Link to={`/view/${course._id}`}><button className="btn btn-primary">Details</button></Link>
-                
-              </div>
+              
             </div>
           </div>
         ))
@@ -54,4 +51,4 @@ const ViewCourses = () => {
   );
 };
 
-export default ViewCourses;
+export default Details;
