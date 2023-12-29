@@ -1,56 +1,54 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import Swal from 'sweetalert2';
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
-  event.preventDefault();
-  const form = event.target;
-  const email = form.email.value;
-  const password = form.password.value;
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-  try {
-    const response = await fetch('http://localhost:8000/api/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-        console.log( 'response ',response)
-      const responseData = await response.json(); // Store the JSON data
-      const { accessToken } = responseData;
-      console.log('response data',responseData)
-      console.log('Received token:', accessToken);
-
-      // Save the token in localStorage or sessionStorage
-      localStorage.setItem('token', accessToken);
-
-      // Optionally, you can redirect the user to a dashboard or perform other actions
-      navigate('/');
-
-      // Display a SweetAlert for success
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        showConfirmButton: false,
-        timer: 1500,
+    try {
+      const response = await fetch("http://localhost:8000/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       });
-    } else {
-      const errorData = await response.json();
-      setErrorMessage(errorData.message || 'Login failed');
-    }
-  } catch (error) {
-    console.error('An error occurred:', error);
-    setErrorMessage('An error occurred. Please try again.');
-  }
-};
 
+      if (response.ok) {
+        console.log("response ", response);
+        const responseData = await response.json(); // Store the JSON data
+        const { accessToken } = responseData;
+        console.log("response data", responseData);
+        console.log("Received token:", accessToken);
+
+        // Save the token in localStorage or sessionStorage
+        localStorage.setItem("token", accessToken);
+
+        navigate("/");
+
+        // Display a SweetAlert for success
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setErrorMessage("An error occurred. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -108,7 +106,10 @@ const Login = () => {
             </form>
             <p className="px-6 pb-4 text-center">
               <small>
-                New Here? <Link to="/register"><span className="text-blue-500">Create an account</span></Link>{' '}
+                New Here?{" "}
+                <Link to="/register">
+                  <span className="text-blue-500">Create an account</span>
+                </Link>{" "}
               </small>
             </p>
           </div>

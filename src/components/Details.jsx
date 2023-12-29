@@ -22,9 +22,9 @@ const Details = () => {
           const data = await response.json();
           console.log("data", data);
           const detail = data.find((detail) => detail._id === id);
-          console.log('detail', detail)
+          console.log("detail", detail);
           setCourse(detail);
-          console.log('course', course)
+          console.log("course", course);
         } else {
           console.error("Error fetching data:", response.status);
         }
@@ -44,13 +44,32 @@ const Details = () => {
             <div className="card-body">
               <h2 className="card-title">{course.name}</h2>
               <p>{course.description}</p>
-              <p>{course.level}</p>
-              <p>{course.topics.join(', ')}</p>
-              <p>{course.price}</p>
-              <p>{course.duration}</p>
-              <p>{course.schedule.startDate}</p>
-              <p>{course.schedule.endDate}</p>
-              <p>{course.schedule.classTime}</p>
+              <p>
+                <span className="text-xl">Level:</span> {course.level}
+              </p>
+              <p>
+                <span className="text-xl">Topics:</span>{" "}
+                {course.topics.join(", ")}
+              </p>
+              <p>
+                <span className="text-xl">Price $</span>
+                {course.price}
+              </p>
+              <p>
+                <span className="text-xl">Duration:</span> {course.duration}
+              </p>
+              <p>
+                <span className="text-xl">Start Date:</span>{" "}
+                {course.schedule.startDate}
+              </p>
+              <p>
+                <span className="text-xl">End Date:</span>{" "}
+                {course.schedule.endDate}
+              </p>
+              <p>
+                <span className="text-xl">Class Time:</span>{" "}
+                {course.schedule.classTime}
+              </p>
             </div>
           </div>
         </div>

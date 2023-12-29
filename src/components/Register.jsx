@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
@@ -25,23 +25,23 @@ const Register = () => {
 
       if (response.ok) {
         console.log("Registration successful");
-        // Optionally, you can redirect the user to a success page or perform other actions
-        navigate('/login'); // Redirect to the home page
+
+        navigate("/login"); // Redirect to the home page
 
         // Display a SweetAlert for success
         Swal.fire({
-          icon: 'success',
-          title: 'Registration Successful',
+          icon: "success",
+          title: "Registration Successful",
           showConfirmButton: false,
           timer: 1500, // Automatically close after 1.5 seconds
         });
       } else {
         const errorData = await response.json();
-        setErrorMessage(errorData.message || 'Registration failed');
+        setErrorMessage(errorData.message || "Registration failed");
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      setErrorMessage('An error occurred. Please try again.');
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
 
@@ -112,7 +112,10 @@ const Register = () => {
             </form>
             <p className="px-6 text-center pb-4">
               <small>
-                Already have an account? <Link to="/login"><span className="text-blue-500">Login here</span></Link>{" "}
+                Already have an account?{" "}
+                <Link to="/login">
+                  <span className="text-blue-500">Login here</span>
+                </Link>{" "}
               </small>
             </p>
           </div>

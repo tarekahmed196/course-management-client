@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const [isLoggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
     // Check if the token is present in local storage
@@ -15,17 +15,15 @@ const NavBar = () => {
     }
   }, []);
 
-  const handleLogOut=()=>{
-    localStorage.removeItem('token');
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
     setLoggedIn(false);
-    navigate('/login')
-
-  }
-  const handleLogin=()=>{
+    navigate("/login");
+  };
+  const handleLogin = () => {
     setLoggedIn(false);
-    navigate('/logout')
-
-  }
+    navigate("/logout");
+  };
 
   const navOptions = (
     <>
