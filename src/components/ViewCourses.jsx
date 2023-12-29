@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Details from "./Details";
 
 const ViewCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -37,13 +38,26 @@ const ViewCourses = () => {
         <p>Loading...</p>
       ) : (
         courses.map((course) => (
-          <div  key={course._id} className=" card w-96 bg-base-100 shadow-xl mb-4">
+          
+          <div  key={course._id} className=" card w-96 bg-gray-300 shadow-xl mb-4 transform transition-transform hover:scale-105 hover:translate-y-[-2px]">
             <div className="card-body">
               <h2 className="card-title">{course.name}</h2>
               <p>{course.description}</p>
+              {/* <p>{course.level}</p>
+              <p>{course.topics}</p>
+              <p>{course.schedule.startDate}</p>
+              <p>{course.schedule.endDate}</p>
+              <p>{course.schedule.classDays}</p>
+              <p>{course.schedule.classTime}</p> */}
               {/* Add other details as needed */}
               <div className="card-actions justify-end">
-                <Link to={`/view/${course._id}`}><button className="btn btn-primary">Details</button></Link>
+
+              <Link to={`/details/${course._id}`}>
+  <button className="btn btn-warning btn-outline text-white bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-300">
+    View Details
+  </button>
+</Link>
+
                 
               </div>
             </div>

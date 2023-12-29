@@ -41,9 +41,10 @@ const router = createBrowserRouter([
         element: <Register></Register>
       },
       {
-        path: "view/:id",
+        path: "details/:id",
         element: <Details></Details>,
-        loader: ({params})=> fetch(`http://localhost:8000/api/courses/${params.id}`)
+  
+        
       }
     ]
   },
