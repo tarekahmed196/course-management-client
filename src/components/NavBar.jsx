@@ -16,8 +16,9 @@ const NavBar = () => {
   }, []);
 
   const handleLogOut=()=>{
+    localStorage.removeItem('token');
     setLoggedIn(false);
-    navigate('/logout')
+    navigate('/login')
 
   }
   const handleLogin=()=>{
@@ -50,7 +51,7 @@ const NavBar = () => {
   );
   return (
     <>
-      <div className="navbar  bg-opacity-100 max-w-screen-xl bg-cyan-800 text-white">
+      <div className="navbar  bg-opacity-100 max-w-screen-xl bg-cyan-500 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

@@ -45,11 +45,27 @@ const CourseForm = () => {
   }, []);
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
-    setCourse((prevCourse) => ({
-      ...prevCourse,
-      [name]: value,
-    }));
+    if (name === 'startDate' || name === 'endDate' || name === 'classTime') {
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        schedule: {
+          ...prevCourse.schedule,
+          [name]: value,
+        },
+      }));
+    } else {
+      // For top-level fields
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        [name]: value,
+      }));
+    }
+    // setCourse((prevCourse) => ({
+    //   ...prevCourse,
+    //   [name]: value,
+    // }));
   };
 
   const handleTopicsChange = (selectedTopics) => {
@@ -92,15 +108,12 @@ const CourseForm = () => {
             timer: 1500,
           });
         console.log('Course created successfully');
-        // Optionally, you can handle success actions here
       } else {
         const errorData = await response.json();
         console.error('Error:', errorData.message);
-        // Optionally, you can handle error actions here
       }
     } catch (error) {
       console.error('An error occurred:', error);
-      // Optionally, you can handle error actions here
     }
   };
 
@@ -119,7 +132,7 @@ const CourseForm = () => {
   
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto mt-8 grid grid-cols-3 gap-8 p-6 bg-white rounded shadow-md">
+    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto mt-8 grid grid-cols-3 gap-8 p-6 bg-cyan-100 rounded shadow-md">
       <div>
         <label className="block mb-2 text-sm font-bold text-gray-600">Course Name:</label>
         <input
@@ -169,6 +182,17 @@ const CourseForm = () => {
           type="text"
           name="level"
           value={course.level}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+        />
+      </div>
+
+      <div>
+        <label className="block mt-4 mb-2 text-sm font-bold text-gray-600">Class Time:</label>
+        <input
+          type="text"
+          name="classTime"
+          value={course.schedule.classTime}
           onChange={handleChange}
           className="w-full p-2 border rounded"
         />
@@ -254,18 +278,9 @@ const CourseForm = () => {
         </div>
       </div>
 
-      <div>
-        <label className="block mt-4 mb-2 text-sm font-bold text-gray-600">Class Time:</label>
-        <input
-          type="text"
-          name="classTime"
-          value={course.schedule.classTime}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-      </div>
+      
 
-      <button type="submit" className="col-span-3 mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-700">
+      <button type="submit" className="col-span-3 mt-4 bg-gradient-to-r from-green-400 to-blue-500 text-white p-2 rounded hover:bg-blue-700">
         Submit
       </button>
     </form>

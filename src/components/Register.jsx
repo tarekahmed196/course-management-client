@@ -104,15 +104,15 @@ const Register = () => {
 
               <div className="form-control mt-6">
                 <input
-                  className="btn btn-primary"
+                  className="btn bg-gradient-to-r from-green-400 to-blue-500"
                   type="submit"
                   value="Register"
                 />
               </div>
             </form>
-            <p className="px-6">
+            <p className="px-6 text-center pb-4">
               <small>
-                Already have an account? <Link to="/login">Login here</Link>{" "}
+                Already have an account? <Link to="/login"><span className="text-blue-500">Login here</span></Link>{" "}
               </small>
             </p>
           </div>

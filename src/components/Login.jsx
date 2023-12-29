@@ -100,15 +100,15 @@ const Login = () => {
 
               <div className="form-control mt-6">
                 <input
-                  className="btn btn-primary"
+                  className="btn bg-gradient-to-r from-green-400 to-blue-500"
                   type="submit"
                   value="Login"
                 />
               </div>
             </form>
-            <p className="px-6">
+            <p className="px-6 pb-4 text-center">
               <small>
-                New Here? <Link to="/register">Create an account</Link>{' '}
+                New Here? <Link to="/register"><span className="text-blue-500">Create an account</span></Link>{' '}
               </small>
             </p>
           </div>

@@ -5,8 +5,7 @@ const Details = () => {
   const { id } = useParams();
   console.log("params id", id);
 
-  const [courses, setCourses] = useState([]);
-  // console.log('courses',courses.schedule.startDate)
+  const [course, setCourse] = useState(null);
 
   const accessToken = localStorage.getItem("token");
 
@@ -23,38 +22,40 @@ const Details = () => {
           const data = await response.json();
           console.log("data", data);
           const detail = data.find((detail) => detail._id === id);
-          setCourses(detail);
+          console.log('detail', detail)
+          setCourse(detail);
+          console.log('course', course)
         } else {
           console.error("Error fetching data:", response.status);
         }
       } catch (error) {
         console.error("An error occurred:", error);
-      } 
+      }
     };
 
     fetchData();
-  }, [accessToken]);
-
-  
+  }, [accessToken, id]);
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="card w-96  shadow-xl bg-gray-300 my-4 transform transition-transform hover:scale-105 hover:translate-y-[-2px]">
-        <div className="card-body">
-          <h2 className="card-title">{courses.name}</h2>
-          <p>{courses.description}</p>
-          <p>{courses.topics}</p>
-          <p>{courses.price}</p>
-          <p>{courses.duration}</p>
-          {/* <p>{courses.schedule.classDays}</p>
-              <p>{courses.schedule.classTime}</p> */}
-            {/* <p>{courses.schedule.startDate}</p>
-            <p>{courses.schedule.endDate}</p> */}
-      
-    
+    <>
+      {course && (
+        <div key={course._id} className="flex items-center justify-center">
+          <div className="card w-96 shadow-xl bg-cyan-300 my-4 transform transition-transform hover:scale-105 hover:translate-y-[-2px]">
+            <div className="card-body">
+              <h2 className="card-title">{course.name}</h2>
+              <p>{course.description}</p>
+              <p>{course.level}</p>
+              <p>{course.topics.join(', ')}</p>
+              <p>{course.price}</p>
+              <p>{course.duration}</p>
+              <p>{course.schedule.startDate}</p>
+              <p>{course.schedule.endDate}</p>
+              <p>{course.schedule.classTime}</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
